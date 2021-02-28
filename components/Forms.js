@@ -12,25 +12,45 @@ const useStyles = makeStyles({
     alignItems: "center",
     height: "100vh",
     overflowY: "scroll",
+    backgroundImage:
+      "linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12)",
   },
   form: {
-    width: "50vw",
+    width: "550px",
+    backgroundColor: "#a8eb12",
+    padding: "15px",
+    borderRadius: "10px",
+    display: "flex",
+    flexDirection: "column",
+    boxShadow: "0px 0px 15px 1px #FFFFFF",
   },
   label: {
     display: "inline-block",
-    width: "150px",
+    width: "20%",
   },
   containerInput: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     height: "50px",
+    width: "100%",
+    padding: "5px",
+    borderRadius: "5px",
   },
   active: {
-    backgroundColor: "blue",
+    backgroundColor: "rgba(42, 211, 245, 0.5)",
   },
   error: {
-    backgroundColor: "red",
+    backgroundColor: "rgb(242, 146, 44)",
+  },
+  input: {
+    width: "50%",
+    marginRight: "10px",
+    height: "30px",
+    borderRadius: "5px",
+    border: "1px solid #8d9b9e",
+    outline: "none",
+    paddingLeft: "10px",
   },
   btn: {
     background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
@@ -40,6 +60,7 @@ const useStyles = makeStyles({
     color: "white",
     height: 48,
     padding: "0 30px",
+    alignSelf: "center",
   },
 });
 
@@ -59,7 +80,7 @@ const validate = (values) => {
   if (!values.password) {
     errors.password = "Isi isial ini";
   } else if (values.password.length < 8) {
-    errors.password = "Password harus minimal 8 karakter!";
+    errors.password = "Minimal 8 karakter!";
   }
   return errors;
 };
@@ -80,14 +101,19 @@ const createRenderer = (render) => ({
       ].join(" ")}
     >
       <label className={styles.label}>{label}</label>
-      {render(input, label, rest)}
+      {render(input, label, styles, rest)}
       {meta.error && meta.touched && <span>{meta.error}</span>}
     </div>
   );
 };
 
-const RenderInput = createRenderer((input, label, rest) => (
-  <input type={rest.type} {...input} placeholder={label} />
+const RenderInput = createRenderer((input, label, styles, rest) => (
+  <input
+    className={styles.input}
+    type={rest.type}
+    {...input}
+    placeholder={label}
+  />
 ));
 
 function Forms() {
@@ -103,6 +129,7 @@ function Forms() {
             container: classes.containerInput,
             active: classes.active,
             error: classes.error,
+            input: classes.input,
           }}
           component={RenderInput}
         />
@@ -114,6 +141,7 @@ function Forms() {
             container: classes.containerInput,
             active: classes.active,
             error: classes.error,
+            input: classes.input,
           }}
           component={RenderInput}
         />
@@ -126,6 +154,7 @@ function Forms() {
             container: classes.containerInput,
             active: classes.active,
             error: classes.error,
+            input: classes.input,
           }}
           component={RenderInput}
         />
@@ -138,6 +167,7 @@ function Forms() {
             container: classes.containerInput,
             active: classes.active,
             error: classes.error,
+            input: classes.input,
           }}
           component={RenderInput}
         />
