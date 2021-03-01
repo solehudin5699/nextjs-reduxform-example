@@ -3,6 +3,7 @@ import { reduxForm, Field } from "redux-form";
 import isValidEmail from "sane-email-validation";
 import { makeStyles } from "@material-ui/styles";
 import { Button } from "@material-ui/core";
+import { useRouter } from "next/router";
 const useStyles = makeStyles({
   container: {
     display: "flex",
@@ -91,7 +92,7 @@ const createRenderer = (render) => ({
   styles,
   ...rest
 }) => {
-  console.log(meta);
+  // console.log(meta);
   return (
     <div
       className={[
@@ -118,6 +119,8 @@ const RenderInput = createRenderer((input, label, styles, rest) => (
 
 function Forms() {
   const classes = useStyles();
+  const router = useRouter();
+  console.log(router.route);
   return (
     <div className={classes.container}>
       <form className={classes.form}>
@@ -171,7 +174,15 @@ function Forms() {
           }}
           component={RenderInput}
         />
-        <Button className={classes.btn}>Register</Button>
+        <Button
+          onClick={(e) => {
+            e.preventDefault();
+            router.push("/post/1");
+          }}
+          className={classes.btn}
+        >
+          Register
+        </Button>
         {/* <button type="submit">Submit</button> */}
       </form>
     </div>
